@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 from google import genai
-from openai import api_key
 
 def main():
     load_dotenv()
