@@ -3,6 +3,7 @@ import sys
 from dotenv import load_dotenv
 import os
 from google import genai
+from google.genai import types
 
 def main():
     load_dotenv()
@@ -12,12 +13,15 @@ def main():
     if len(sys.argv) < 2:
         print("Please enter a prompt, or try 'Hey Agent, I want to learn something cool!'")
         sys.exit(1)
-
     prompt = sys.argv[1]
+
+    messages = [
+        types.Content(role="user", parts=[types.Part(text=prompt)])
+    ]
 
     response = client.models.generate_content(
         model="gemini-3.1-flash-lite-preview",
-        contents=prompt
+        contents=messages
     )
 
     print(response.text)
